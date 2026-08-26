@@ -1,61 +1,57 @@
 # 🥣 PvPSoup
 
-**PvPSoup** — это клиентский мод для Minecraft на Fabric (версия 1.21), предназначенный для автоматизации механик PvP с использованием супов (Soup PvP).
+**PvPSoup** is a client-side mod for Minecraft on Fabric (version 1.21.x), designed to automate PvP mechanics involving soups (Soup PvP).
 
 ---
 
-## ✨ Особенности
+## ✨ Features
 
-* **Auto-Refill** — моментальное пополнение хотбара супами из инвентаря.
-* **Auto-Drop Bowls** — автоматическое выкидывание пустых мисок из хотбара и инвентаря.
-* **Auto-Eat** — быстрое поедание супа по нажатию клавиши или по порогу здоровья (Health Trigger).
-* **Гибкие настройки** — полное управление функциями через внутриигровые команды.
+- **Auto-Refill** — instantly refills your hotbar with soups from your inventory.
+- **Auto-Drop Bowls** — automatically drops empty bowls from your hotbar and inventory.
+- **Auto-Eat** — quickly consumes soup via a keybind or health threshold (Health Trigger).
+- **Flexible configuration** — full control over features via in-game commands.
 
 ---
 
-## 🎮 Команды и управление
+## 🎮 Commands & Controls
 
-Основная команда мода — `/pvpsoup`.
+The mod's main command is `/pvpsoup`.
 
-| Команда | Описание | Значение по умолчанию |
+| Command | Description | Default Value |
 | :--- | :--- | :--- |
-| `/pvpsoup toggle <true\|false>` | Глобальный переключатель мода | `true` |
-| `/pvpsoup refill <true\|false>` | Автопополнение хотбара | `true` |
-| `/pvpsoup dropbowls <true\|false>` | Авто-выброс пустых мисок | `true` |
-| `/pvpsoup autoeat <true\|false>` | Авто-поедание супов | `true` |
-| `/pvpsoup trigger <key\|health>` | Режим поедания (`key` — по кнопке, `health` — по ХП) | `key` |
-| `/pvpsoup health <сердечки>` | Порог ХП для режима `health` (в сердечках, напр. `7.0`) | `7.0` |
-| `/pvpsoup help` | Вывод справки по командам | — |
+| `/pvpsoup toggle <true\|false>` | Global mod toggle | `true` |
+| `/pvpsoup refill <true\|false>` | Auto-refill hotbar | `true` |
+| `/pvpsoup dropbowls <true\|false>` | Auto-drop empty bowls | `true` |
+| `/pvpsoup autoeat <true\|false>` | Auto-eat soups | `true` |
+| `/pvpsoup trigger <key\|health>` | Eat trigger mode (`key` — by keybind, `health` — by HP) | `key` |
+| `/pvpsoup health <hearts>` | HP threshold for `health` mode (in hearts, e.g. `7.0`) | `7.0` |
+| `/pvpsoup help` | Display command help | — |
 
-> ⌨️ **Бинд по умолчанию:** Клавиша **`R`** (можно переназначить в стандартных настройках управления Minecraft).
+> ⌨️ **Default keybind:** **`R`** (can be rebound in Minecraft's standard controls settings).
 
 ---
 
-## 🛠️ Сборка из исходников
+## 🛠️ Building from Source
 
-### Требования
-* **JDK 21** или выше
+### Requirements
+- **JDK 21** or higher
 
-### Шаги
-1. Клонируйте репозиторий:
+### Steps
+1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/pvpsoup.git](https://github.com/your-username/pvpsoup.git)
+   git clone https://github.com/your-username/pvpsoup.git
    cd pvpsoup
+   ```
 
-```
+2. Build the mod using Gradle:
+   ```bash
+   ./gradlew build
+   ```
 
-2. Скомпилируйте мод с помощью Gradle:
-```bash
-./gradlew build
-
-```
-
-
-3. Готовый `.jar` файл будет находиться в директории `build/libs/`.
+3. The compiled `.jar` file will be located in the `build/libs/` directory.
 
 ---
 
-## 📜 Лицензия
+## 📜 License
 
-Проект распространяется под лицензией **GNU General Public License v3.0 (GPL-3.0)**. Подробнее см. в файле [LICENSE](https://www.google.com/search?q=LICENSE).
-
+This project is distributed under the **GNU General Public License v3.0 (GPL-3.0)**. For more details, see the [LICENSE](https://www.google.com/search?q=LICENSE) file.
