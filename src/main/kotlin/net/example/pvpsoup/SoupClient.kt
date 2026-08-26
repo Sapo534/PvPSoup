@@ -14,6 +14,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.fabricmc.loader.api.FabricLoader
+import net.fabricmc.fabric.api.client.sound.v1.ClientPlaySoundEvents
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
@@ -44,6 +46,7 @@ data class ModConfig(
     var killFeedFilterEnabled: Boolean = true,
     var eatTrigger: EatTrigger = EatTrigger.KEY,
     var healthThreshold: Float = 14.0f
+    var muteWitherSoundEnabled: Boolean = true,
 )
 
 class SoupClient : ClientModInitializer {
@@ -79,7 +82,16 @@ class SoupClient : ClientModInitializer {
     }
 
     override fun onInitializeClient() {
-        loadConfig()
+	    loadConfig()
+
+	    ClientPlaySoundEvents.ALLOW_SOUND.register { instance, soundEngine ->
+	        if (config.modEnabled && config.muteWitherSoundEnabled) {
+ 		    if (instance.id == SoundEvents.WITHER_SPAWN.location) {ш
+ 	               return@register false // Отменяем воспроизведение
+ 	           }
+	        }
+            true
+  	  }
 
         eatSoupKey = KeyBindingHelper.registerKeyBinding(
             KeyMapping(
