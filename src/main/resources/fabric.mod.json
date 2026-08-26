@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "pvpsoup",
+  "version": "1.0.0",
+  "name": "PvPSoup",
+  "description": "Auto refill soups, drop empty bowls and quick soup eat keybind for 1.21",
+  "authors": ["User"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "net.example.pvpsoup.PvPSoup"
+      }
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-language-kotlin": "*"
+  }
+}

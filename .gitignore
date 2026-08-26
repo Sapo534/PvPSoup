@@ -1,0 +1,23 @@
+# Gradle & Build output
+.gradle/
+build/
+out/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# Minecraft/Fabric runtime data
+run/
+logs/
+
+# Misc
+*.log
+.DS_Store
+EOF
