@@ -1,6 +1,7 @@
 package net.example.pvpsoup.command
 
 import com.mojang.brigadier.arguments.FloatArgumentType
+import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.suggestion.SuggestionProvider
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
@@ -21,6 +22,7 @@ object SoupCommand {
             }
 
             val commandNode = ClientCommandManager.literal("soupclient")
+                // /soup list
                 .then(ClientCommandManager.literal("list")
                     .executes {
                         ChatUtils.info("§lСписок модулей SoupClient:")
@@ -31,6 +33,7 @@ object SoupCommand {
                         1
                     }
                 )
+                // /soup toggle <module>
                 .then(ClientCommandManager.literal("toggle")
                     .then(ClientCommandManager.argument("module", StringArgumentType.word())
                         .suggests(featureSuggestions)
@@ -40,12 +43,13 @@ object SoupCommand {
                             if (feature != null) {
                                 feature.toggle()
                             } else {
-                                ChatUtils.error("Модуль '$moduleName' не найден! Используйте /soupclient list")
+                                ChatUtils.error("Модуль '$moduleName' не найден! Используйте /soup list")
                             }
                             1
                         }
                     )
                 )
+                // /soup set <autosoup/delay>
                 .then(ClientCommandManager.literal("set")
                     .then(ClientCommandManager.literal("autosoup")
                         .then(ClientCommandManager.argument("health", FloatArgumentType.floatArg(1.0f, 20.0f))
@@ -58,8 +62,31 @@ object SoupCommand {
                             }
                         )
                     )
+                    .then(ClientCommandManager.literal("delay")
+                        .then(ClientCommandManager.argument("ms", IntegerArgumentType.integer(50, 1000))
+                            .executes { context ->
+                                val delayMs = IntegerArgumentType.getInteger(context, "ms").toLong()
+                                ConfigManager.config.autoSoupDelayMs = delayMs
+                                ConfigManager.save()
+                                ChatUtils.success("Задержка AutoSoup установлена на $delayMs мс")
+                                1
+                            }
+                        )
+                    )
                 )
+                // /soup chams <mode/alpha>
                 .then(ClientCommandManager.literal("chams")
+                    .then(ClientCommandManager.literal("alpha")
+                        .then(ClientCommandManager.argument("value", FloatArgumentType.floatArg(0.1f, 1.0f))
+                            .executes { context ->
+                                val alpha = FloatArgumentType.getFloat(context, "value")
+                                ConfigManager.config.chamsAlpha = alpha
+                                ConfigManager.save()
+                                ChatUtils.success("Прозрачность Chams установлена на ${(alpha * 100).toInt()}%")
+                                1
+                            }
+                        )
+                    )
                     .then(ClientCommandManager.argument("mode", StringArgumentType.word())
                         .suggests { _, builder ->
                             ColorMode.entries.forEach { builder.suggest(it.name.lowercase()) }

@@ -28,6 +28,13 @@ object ConfigManager {
             configFile.reader().use { reader ->
                 config = gson.fromJson(reader, SoupConfig::class.java) ?: SoupConfig()
             }
+
+            // Добавляем новые модули в старые конфиги автоматически
+            val defaultModules = SoupConfig().enabledModules
+            defaultModules.forEach { (key, value) ->
+                config.enabledModules.putIfAbsent(key, value)
+            }
+            save()
         } catch (e: Exception) {
             e.printStackTrace()
             config = SoupConfig()

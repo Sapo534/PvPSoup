@@ -1,9 +1,6 @@
 package net.example.pvpsoup.feature
 
 import net.example.pvpsoup.feature.combat.AutoSoupFeature
-import net.example.pvpsoup.feature.render.AntiInvisibilityFeature
-import net.example.pvpsoup.feature.render.ChamsFeature // <-- Добавленный импорт
-import net.example.pvpsoup.feature.render.Esp2DFeature
 
 object FeatureManager {
     private val features = mutableMapOf<String, Feature>()
@@ -13,6 +10,8 @@ object FeatureManager {
         register(Esp2DFeature)
         register(ChamsFeature)
         register(AutoSoupFeature)
+        register(ChatMuteFeature)
+        register(AntiWitherFeature)
     }
 
     private fun register(feature: Feature) {
